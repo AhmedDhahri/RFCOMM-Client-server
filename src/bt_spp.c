@@ -17,7 +17,6 @@ int get_spp_sock(char* dest, int channel){
 }
 
 int main1(){
-    //FILE* rec =  fopen("rec.jpg","w+");
 
     //uint8_t* bo;
     //uint8_t* bi = (int*)malloc(sizeof(uint64_t));
@@ -53,10 +52,24 @@ int main1(){
 int read_write(char rw, uint8_t* data, int sock){
     switch(rw){
         case 'r':
-            return read(sock, &data, 1);
+            return read(sock, data, 1);
             break;
         case 'w':
             return write(sock, data, 1);
+            break;
+        default:
+            close(sock);
+            return -1;
+    }
+}
+    
+int read_write_32(char rw, uint32_t* data, int sock){
+    switch(rw){
+        case 'r':
+            return read(sock, data, 4);
+            break;
+        case 'w':
+            return write(sock, data, 4);
             break;
         default:
             close(sock);

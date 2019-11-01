@@ -14,7 +14,7 @@ $(EXE): $(OBJ)
 	@echo "Linking rfcomm_client ..."
 	@gcc -o $@ $^ $(CCFLAGS)
 	
-./obj/main.o: main.c ./inc/bt_sdp.h ./inc/bt_spp.h ./inc/file_mgt.h ./inc/shm_mgt.h 
+./obj/main.o: main.c ./inc/bt_sdp.h ./inc/bt_spp.h ./inc/file_mgt.h ./inc/msgq_mgt.h 
 	@echo "Compiling main.c ..."
 	@$(CC) -c $< -o $@  $(CCFLAGS)
 
@@ -30,6 +30,10 @@ $(EXE): $(OBJ)
 	@echo "Compiling file_mgt.c ..."
 	@$(CC) -c $< -o $@ $(CCFLAGS)
 	
+	
+./obj/msgq_mgt.o: ./src/msgq_mgt.c ./inc/msgq_mgt.h
+	@echo "Compiling msgq_mgt.c ..."
+	@$(CC) -c $< -o $@ $(CCFLAGS)
 	
 ./obj/shm_mgt.o: ./src/shm_mgt.c ./inc/shm_mgt.h
 	@echo "Compiling shm_mgt.c ..."
